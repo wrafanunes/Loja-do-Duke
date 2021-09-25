@@ -1,0 +1,104 @@
+﻿@model Loja_do_Duke.Models.ViewModels.SupplyVM
+
+<form method="post">
+    <input asp-for="Supply.Id" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Atualizar Suprimento</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Supply.Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Supply.Name" class="form-control" />
+                        <span asp-validation-for="Supply.Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Supply.Price"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Supply.Price" class="form-control" />
+                        <span asp-validation-for="Supply.Price" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Supply.InventoryQuantity"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Supply.InventoryQuantity" class="form-control" />
+                        <span asp-validation-for="Supply.InventoryQuantity" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Supply.AvailableQuantity"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Supply.AvailableQuantity" class="form-control" />
+                        <span asp-validation-for="Supply.AvailableQuantity" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Supply.Description"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Supply.Description" class="form-control" />
+                        <span asp-validation-for="Supply.Description" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Supply.CategoryId"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Supply.CategoryId" asp-items="@Model.CategorySelectList">
+                            <option disabled selected>--Selecionar Categoria--</option>
+                        </select>
+                        <span asp-validation-for="Supply.CategoryId" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Atualizar" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> Voltar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts{
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+}
+

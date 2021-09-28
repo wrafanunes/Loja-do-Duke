@@ -16,5 +16,6 @@ namespace Loja_do_Duke.Data
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Supply> Supplies { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

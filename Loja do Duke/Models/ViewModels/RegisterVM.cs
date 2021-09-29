@@ -8,12 +8,12 @@ namespace Loja_do_Duke.Models.ViewModels
 {
     public class RegisterVM
     {
-        [Required]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [EmailAddress]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [StringLength(100, ErrorMessage = "A {0} deve ter pelo menos {1} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Senha")]
@@ -24,7 +24,8 @@ namespace Loja_do_Duke.Models.ViewModels
         [Compare("Password", ErrorMessage = "As senhas digitadas divergem.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [Display(Name = "Nome")]
         public string Name { get; set; }
     }
 }

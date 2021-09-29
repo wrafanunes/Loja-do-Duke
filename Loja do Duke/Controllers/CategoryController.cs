@@ -52,7 +52,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         //Get - Edit
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
             if (null == id || 0 == id) return NotFound();
             var obj = _db.Categories.Find(id);
@@ -82,7 +82,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         //Get - Delete
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
             if (null == id || 0 == id) return NotFound();
             var obj = _db.Categories.Find(id);

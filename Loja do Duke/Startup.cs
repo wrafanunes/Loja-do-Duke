@@ -33,6 +33,13 @@ namespace Loja_do_Duke
                     Configuration.GetConnectionString("DefaultConnection")
                     ));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequiredLength = 5;
+                opt.Password.RequireLowercase = true;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(2);
+                opt.Lockout.MaxFailedAccessAttempts = 5;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

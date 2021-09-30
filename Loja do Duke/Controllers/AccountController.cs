@@ -26,16 +26,19 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             RegisterVM registerVM = new RegisterVM();
             return View(registerVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterVM model)
+        public async Task<IActionResult> Register(RegisterVM model, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+            returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };
@@ -43,7 +46,7 @@ namespace Loja_do_Duke.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return LocalRedirect(returnUrl);
                 }
                 AddErrors(result);
             }
@@ -62,12 +65,13 @@ namespace Loja_do_Duke.Controllers
         public async Task<IActionResult> Login(LoginVM model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return Redirect(returnUrl);
+                    return LocalRedirect(returnUrl);
                 }
                 else
                 {

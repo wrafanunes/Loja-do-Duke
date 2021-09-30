@@ -1,5 +1,6 @@
 ﻿using Loja_do_Duke.Data;
 using Loja_do_Duke.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Loja_do_Duke.Controllers
             _db = db;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             IEnumerable<Category> categories = _db.Categories;

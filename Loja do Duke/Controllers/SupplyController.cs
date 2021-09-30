@@ -1,6 +1,7 @@
 ﻿using Loja_do_Duke.Data;
 using Loja_do_Duke.Models;
 using Loja_do_Duke.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace Loja_do_Duke.Controllers
             _db = db;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             IEnumerable<Supply> supplies = _db.Supplies.Include(x => x.Category);

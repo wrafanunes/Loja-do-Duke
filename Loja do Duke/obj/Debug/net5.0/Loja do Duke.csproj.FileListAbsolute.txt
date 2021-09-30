@@ -880,3 +880,4 @@ C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Loja do Duke.pdb
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Loja do Duke.genruntimeconfig.cache
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Loja do Duke.csproj.AssemblyReference.cache
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs

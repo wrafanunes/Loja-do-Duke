@@ -17,6 +17,6 @@ namespace Loja_do_Duke.Models.ViewModels
         public string Password { get; set; }
 
         [Display(Name = "Lembrar-me?")]
-        public bool LembrarMe { get; set; }
+        public bool RememberMe { get; set; }
     }
 }

@@ -102,5 +102,19 @@ namespace Loja_do_Duke.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
+        {
+            
+            return View(model);
+        }
     }
 }

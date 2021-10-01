@@ -541,7 +541,6 @@ C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\refs\Microsoft.Extensions.Diagnostics.HealthChecks.dll
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Composite.dll
-C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\refs\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\refs\Microsoft.Extensions.Hosting.Abstractions.dll
@@ -884,3 +883,8 @@ C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\Lockout.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\ForgotPassword.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\ForgotPasswordConfirmation.cshtml.g.cs
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\Loja do Duke.StaticWebAssets.xml
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\Mailjet.Client.dll
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll

@@ -131,22 +131,23 @@ namespace Loja_do_Duke.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(ForgotPasswordVM model)
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (null == user)
                 {
-                    return RedirectToAction("ForgotPasswordConfirmation");
+                    return RedirectToAction("ResetPasswordConfirmation");
                 }
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                await _sender.SendEmailAsync(model.Email, "Recuperar senha - Loja do Duke",
-                    "Por favor recupere tua senha clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
-                return RedirectToAction("ForgotPasswordConfirmation");
+                var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ResetPasswordConfirmation");
+                }
+                AddErrors(result);
             }
-            return View(model);
+            return View();
         }
 
         [HttpGet]

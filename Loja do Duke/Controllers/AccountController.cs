@@ -1,6 +1,7 @@
 ﻿using Loja_do_Duke.Models;
 using Loja_do_Duke.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace Loja_do_Duke.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IEmailSender _sender;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender sender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _sender = sender;
         }
 
         public IActionResult Index()
@@ -94,15 +97,6 @@ namespace Loja_do_Duke.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        private void AddErrors(IdentityResult identity)
-        {
-            foreach (var error in identity.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-
-        }
-
         [HttpGet]
         public IActionResult ForgotPassword()
         {
@@ -113,8 +107,66 @@ namespace Loja_do_Duke.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
         {
-            
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (null == user)
+                {
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                await _sender.SendEmailAsync(model.Email, "Resetar senha - Loja do Duke",
+                    "Por favor resete tua senha clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string code = null)
+        {
+            return code == null ? View("Error") : View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ForgotPasswordVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (null == user)
+                {
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                await _sender.SendEmailAsync(model.Email, "Recuperar senha - Loja do Duke",
+                    "Por favor recupere tua senha clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+        private void AddErrors(IdentityResult identity)
+        {
+            foreach (var error in identity.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
         }
     }
 }

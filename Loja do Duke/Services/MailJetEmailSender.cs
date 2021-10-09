@@ -29,14 +29,14 @@ namespace Loja_do_Duke.Services
             };
             MailjetRequest request = new MailjetRequest
             {
-                Resource = Send.Resource,
+                Resource = SendV31.Resource,
             }
              .Property(Send.Messages, new JArray {
      new JObject {
       {
        "From",
        new JObject {
-        {"Email", "wrsnunes@gmail.com"},
+        {"Email", "wrafanunes@protonmail.com"},
         {"Name", "Wilson"}
        }
       }, {
@@ -45,7 +45,7 @@ namespace Loja_do_Duke.Services
         new JObject {
          {
           "Email",
-          "wrsnunes@gmail.com"
+          email
          }, {
           "Name",
           "Wilson"

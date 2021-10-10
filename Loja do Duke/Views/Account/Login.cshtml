@@ -1,4 +1,6 @@
 ﻿@model Loja_do_Duke.Models.ViewModels.LoginVM
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> manager
 <h1 class="text-info">Entrar</h1>
 <div class="row">
     <div class="col-md-8">
@@ -43,6 +45,32 @@
             <p><a asp-action="ForgotPassword">Esqueceu tua senha?</a></p>
         </form>
     </div>
+    @{
+        var schemes = await manager.GetExternalAuthenticationSchemesAsync();
+        var loginProviders = schemes.ToList();
+
+    }
+    @if (loginProviders.Count() > 0)
+    {
+        <div class="md-4">
+            <section>
+                <h4>Use outro serviço para entrar.</h4>
+                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
+                    <div>
+                        <p>
+                            @foreach (var provider in loginProviders)
+                            {
+                                <button type="submit" class="btn btn-primary" name="provider" value="provider.Name"
+                                        title="Entrar com @provider.Name">
+                                    @provider.Name
+                                </button>
+                            }
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    }
 </div>
 
 

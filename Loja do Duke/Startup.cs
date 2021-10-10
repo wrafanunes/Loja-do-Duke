@@ -43,6 +43,11 @@ namespace Loja_do_Duke
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(2);
                 opt.Lockout.MaxFailedAccessAttempts = 5;
             });
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "1822027257998488";
+                options.AppSecret = "6cc858c804c56c55a52a4017d6eb44e8";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

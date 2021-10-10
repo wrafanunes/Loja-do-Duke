@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7Y8WPnooy+ChjI2ScZc8Go24lK8xyGO1u3GSLyHM4z8OuJghobO8sTHudwHzQZv1/leLA/o3ruo1LN36SyG9Ig==",
+  "dgSpecHash": "IxWHvsnARFf/e6kTeHxIgrMoARwK0BG+UOXI3cisAtHIuJi75ayHBKm4oA/wJwXvBpt4x52b04accN5hTdjWqw==",
   "success": true,
   "projectFilePath": "C:\\Users\\wilson.nunes\\Documents\\workspace\\C#\\Loja do Duke\\Loja do Duke\\Loja do Duke.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\mailjet.api\\2.0.2\\mailjet.api.2.0.2.nupkg.sha512",
+    "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\5.0.9\\microsoft.aspnetcore.authentication.facebook.5.0.9.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.9\\microsoft.aspnetcore.cryptography.internal.5.0.9.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.9\\microsoft.aspnetcore.cryptography.keyderivation.5.0.9.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

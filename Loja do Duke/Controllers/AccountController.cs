@@ -253,6 +253,36 @@ namespace Loja_do_Duke.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EnableAuthenticator()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            await _userManager.ResetAuthenticatorKeyAsync(user);
+            var token = await _userManager.GetAuthenticatorKeyAsync(user);
+            var model = new TwoFactorAuthenticationVM() { Token = token };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EnableAuthenticator(TwoFactorAuthenticationVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var succeeded = await _userManager.VerifyTwoFactorTokenAsync(user, _userManager.Options.Tokens.AuthenticatorTokenProvider, model.Code);
+                if (succeeded)
+                {
+                    await _userManager.SetTwoFactorEnabledAsync(user, true);
+                }
+                else
+                {
+                    ModelState.AddModelError("Verifique", "Tua autenticação de dois fatores não pôde ser validada");
+                    return View(model);
+                }
+            }
+            return RedirectToAction("AuthenticationConfirmation");
+        }
+
         private void AddErrors(IdentityResult identity)
         {
             foreach (var error in identity.Errors)

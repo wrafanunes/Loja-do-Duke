@@ -1,0 +1,12 @@
+﻿@model Loja_do_Duke.Models.ViewModels.TwoFactorAuthenticationVM
+
+<p>Por favor insira o código abaixo no seu aplicativo de autenticação</p>
+<p>@Model.Token</p>
+
+<form method="post">
+    <input hidden asp-for="Token" />
+    <div class="form-group">
+        Insira o código: <input type="text" class="form-control" asp-for="Code" />
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>

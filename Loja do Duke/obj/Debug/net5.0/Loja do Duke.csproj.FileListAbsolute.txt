@@ -894,3 +894,6 @@ C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\Error.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\ExternalLoginConfirmation.cshtml.g.cs
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\EnableAuthenticator.cshtml.g.cs
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\AuthenticationConfirmation.cshtml.g.cs
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Account\VerifyAuthenticatorCode.cshtml.g.cs

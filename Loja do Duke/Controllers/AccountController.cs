@@ -96,6 +96,10 @@ namespace Loja_do_Duke.Controllers
                 {
                     return LocalRedirect(returnUrl);
                 }
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToAction(nameof(VerifyAuthenticatorCode), new { returnUrl, RememberMe = model.RememberMe });
+                }
                 if (result.IsLockedOut)
                 {
                     return View("Lockout");
@@ -208,6 +212,10 @@ namespace Loja_do_Duke.Controllers
                 await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
                 return LocalRedirect(returnUrl);
             }
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToAction("VerifyAuthenticatorCode", new { returnUrl = returnUrl });
+            }
             else
             {
                 ViewData["ReturnUrl"] = returnUrl;
@@ -268,6 +276,7 @@ namespace Loja_do_Duke.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var user = await _userManager.GetUserAsync(User);
                 var succeeded = await _userManager.VerifyTwoFactorTokenAsync(user, _userManager.Options.Tokens.AuthenticatorTokenProvider, model.Code);
                 if (succeeded)
@@ -276,11 +285,53 @@ namespace Loja_do_Duke.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Verifique", "Tua autenticação de dois fatores não pôde ser validada");
+                    ModelState.AddModelError("Verifique", "Sua autenticação de dois fatores não pôde ser validada");
                     return View(model);
                 }
             }
-            return RedirectToAction("AuthenticationConfirmation");
+            return RedirectToAction(nameof(AuthenticationConfirmation));
+        }
+
+        public IActionResult AuthenticationConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe, string returnUrl = null)
+        {
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            if (null == user)
+            {
+                return View("Error");
+            }
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(new VerifyAuthenticatorVM { ReturnUrl = returnUrl, RememberMe = rememberMe });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyAuthenticatorCode(VerifyAuthenticatorVM model)
+        {
+            model.ReturnUrl = model.ReturnUrl ?? Url.Content("~/");
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(model.Code, model.RememberMe, rememberClient: false);
+            if (result.Succeeded)
+            {
+                return LocalRedirect(model.ReturnUrl);
+            }
+            if (result.IsLockedOut)
+            {
+                return View("LockOut");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Código inválido");
+                return View(model);
+            }
         }
 
         private void AddErrors(IdentityResult identity)

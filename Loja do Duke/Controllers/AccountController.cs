@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,14 +41,28 @@ namespace Loja_do_Duke.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register(string returnUrl = null)
         {
-            if(!await _roleManager.RoleExistsAsync("Admin"))
+            if (!await _roleManager.RoleExistsAsync("Admin"))
             {
                 //criar roles
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
                 await _roleManager.CreateAsync(new IdentityRole("User"));
             }
+            List<SelectListItem> selects = new List<SelectListItem>();
+            selects.Add(new SelectListItem()
+            {
+                Value = "Admin",
+                Text = "Admin"
+            });
+            selects.Add(new SelectListItem()
+            {
+                Value = "User",
+                Text = "User"
+            });
             ViewData["ReturnUrl"] = returnUrl;
-            RegisterVM registerVM = new RegisterVM();
+            RegisterVM registerVM = new RegisterVM()
+            {
+                RoleList = selects
+            };
             return View(registerVM);
         }
 
@@ -64,6 +79,14 @@ namespace Loja_do_Duke.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if (model.SelectedRole != null && model.SelectedRole.Length > 0 && model.SelectedRole == "Admin")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     await _sender.SendEmailAsync(model.Email, "Confirme sua conta - Loja do Duke",
@@ -275,6 +298,7 @@ namespace Loja_do_Duke.Controllers
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "User");
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {

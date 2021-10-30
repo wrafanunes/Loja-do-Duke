@@ -16,7 +16,14 @@
             <a asp-action="EnableAuthenticator" asp-controller="Account">Ativar autenticação de dois fatores</a>
         }
 
-        <br /><br />
+        <br /><br />@if (User.IsInRole("Admin"))
+        {
+            <h2>Seu nível de autorização é - Administrador</h2>
+        }
+        else
+        {
+            <h2>Seu nível de autorização é - Usuário</h2>
+        }
     }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

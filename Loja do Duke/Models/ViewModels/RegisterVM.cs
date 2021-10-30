@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,5 +28,7 @@ namespace Loja_do_Duke.Models.ViewModels
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [Display(Name = "Nome")]
         public string Name { get; set; }
+        public IEnumerable<SelectListItem> RoleList { get; set; }
+        public string SelectedRole { get; set; }
     }
 }

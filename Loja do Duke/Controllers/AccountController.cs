@@ -1,5 +1,6 @@
 ﻿using Loja_do_Duke.Models;
 using Loja_do_Duke.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,19 +13,22 @@ using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _sender;
         private readonly UrlEncoder _encoder;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender sender, UrlEncoder encoder)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender sender, UrlEncoder encoder, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _sender = sender;
             _encoder = encoder;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -33,14 +37,22 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(string returnUrl = null)
         {
+            if(!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                //criar roles
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                await _roleManager.CreateAsync(new IdentityRole("User"));
+            }
             ViewData["ReturnUrl"] = returnUrl;
             RegisterVM registerVM = new RegisterVM();
             return View(registerVM);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterVM model, string returnUrl = null)
         {
@@ -56,6 +68,7 @@ namespace Loja_do_Duke.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     await _sender.SendEmailAsync(model.Email, "Confirme sua conta - Loja do Duke",
                         "Por favor confirme sua conta clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
                 AddErrors(result);
@@ -64,6 +77,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             if (null == userId || null == code)
@@ -80,6 +94,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -87,6 +102,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM model, string returnUrl = null)
         {
@@ -125,6 +141,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
             return View();
@@ -132,6 +149,7 @@ namespace Loja_do_Duke.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
         {
             if (ModelState.IsValid)
@@ -151,6 +169,14 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult ResetPassword(string code = null)
         {
             return code == null ? View("Error") : View();
@@ -158,6 +184,7 @@ namespace Loja_do_Duke.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> ResetPassword(ResetPasswordVM model)
         {
             if (ModelState.IsValid)
@@ -178,13 +205,15 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
-        public IActionResult ForgotPasswordConfirmation()
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string returnurl = null)
         {
             //redirecionar para o provedor de autenticação externo
@@ -194,6 +223,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -231,6 +261,7 @@ namespace Loja_do_Duke.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationVM model, string returnUrl = null)
         {
             if (ModelState.IsValid)
@@ -256,12 +287,6 @@ namespace Loja_do_Duke.Controllers
             }
             ViewData["ReturnUrl"] = returnUrl;
             return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult ResetPasswordConfirmation()
-        {
-            return View();
         }
 
         [HttpGet]
@@ -313,12 +338,14 @@ namespace Loja_do_Duke.Controllers
             return RedirectToAction(nameof(AuthenticationConfirmation));
         }
 
+        [HttpGet]
         public IActionResult AuthenticationConfirmation()
         {
             return View();
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> VerifyAuthenticatorCode(bool rememberMe, string returnUrl = null)
         {
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -332,6 +359,7 @@ namespace Loja_do_Duke.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> VerifyAuthenticatorCode(VerifyAuthenticatorVM model)
         {
             model.ReturnUrl = model.ReturnUrl ?? Url.Content("~/");

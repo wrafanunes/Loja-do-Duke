@@ -1,7 +1,7 @@
 ﻿@model Loja_do_Duke.Models.ViewModels.ExternalLoginConfirmationVM
 
 <h1 class="text-info">Registrar</h1>
-<h3>Associar com tua conta @ViewData["ProviderDisplayName"]</h3>
+<h3>Associar com sua conta @ViewData["ProviderDisplayName"]</h3>
 <form asp-controller="Account" asp-action="ExternalLoginConfirmation" method="post" role="form"
       asp-route-returnurl="@ViewData["ReturnUrl"]">
     <h4>Formulário de Associação</h4>

@@ -1,4 +1,5 @@
 ﻿using Loja_do_Duke.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,21 +13,27 @@ namespace Loja_do_Duke.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<IdentityUser> _manager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> manager)
         {
             _logger = logger;
+            _manager = manager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var user = await _manager.GetUserAsync(User);
+            if (null == user)
+            {
+                ViewData["TwoFactorEnabled"] = false;
+            }
+            else
+            {
+                ViewData["TwoFactorEnabled"] = user.TwoFactorEnabled;
+            }
             return View();
         }
-
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

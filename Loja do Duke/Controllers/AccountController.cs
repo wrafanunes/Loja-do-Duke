@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
@@ -16,12 +17,14 @@ namespace Loja_do_Duke.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _sender;
+        private readonly UrlEncoder _encoder;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender sender)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender sender, UrlEncoder encoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _sender = sender;
+            _encoder = encoder;
         }
 
         public IActionResult Index()
@@ -51,8 +54,8 @@ namespace Loja_do_Duke.Controllers
                 {
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    await _sender.SendEmailAsync(model.Email, "Confirme tua conta - Loja do Duke",
-                        "Por favor confirme tua conta clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
+                    await _sender.SendEmailAsync(model.Email, "Confirme sua conta - Loja do Duke",
+                        "Por favor confirme sua conta clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
                     return LocalRedirect(returnUrl);
                 }
                 AddErrors(result);
@@ -141,7 +144,7 @@ namespace Loja_do_Duke.Controllers
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 await _sender.SendEmailAsync(model.Email, "Resetar senha - Loja do Duke",
-                    "Por favor resete tua senha clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
+                    "Por favor resete sua senha clicando aqui: <a href=\"" + callbackUrl + "\">link</a>");
                 return RedirectToAction("ForgotPasswordConfirmation");
             }
             return View(model);
@@ -262,12 +265,30 @@ namespace Loja_do_Duke.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EnableAuthenticator()
+        public async Task<IActionResult> RemoveAuthenticator()
         {
             var user = await _userManager.GetUserAsync(User);
             await _userManager.ResetAuthenticatorKeyAsync(user);
+            await _userManager.SetTwoFactorEnabledAsync(user, false);
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EnableAuthenticator()
+        {
+            /*
+             * 2 - token secreto
+             * 1 - endereço de e-mail
+             * 0 - nome do serviço, pode ser o que eu definir, preferencialmente o nome do projeto
+             */
+
+            string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+            var user = await _userManager.GetUserAsync(User);
+            await _userManager.ResetAuthenticatorKeyAsync(user);
             var token = await _userManager.GetAuthenticatorKeyAsync(user);
-            var model = new TwoFactorAuthenticationVM() { Token = token };
+            string AuthenticatorUri = string.Format(AuthenticatorUriFormat, _encoder.Encode("Loja do Duke"),
+                _encoder.Encode(user.Email), token);
+            var model = new TwoFactorAuthenticationVM() { Token = token, QRCodeUrl = AuthenticatorUri };
             return View(model);
         }
 

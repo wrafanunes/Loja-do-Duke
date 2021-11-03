@@ -76,7 +76,14 @@ namespace Loja_do_Duke.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                if (!result.Succeeded && result.Errors.Count() > 0)
+                {
+                    foreach(var error in result.Errors)
+                    {
+                        if (error.Code == "DuplicateUserName") error.Description = $"O usuário {model.Email} já está sendo usado.";
+                    }
+                }
                 if (result.Succeeded)
                 {
                     if (model.SelectedRole != null && model.SelectedRole.Length > 0 && model.SelectedRole == "Admin")

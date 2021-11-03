@@ -43,6 +43,9 @@ namespace Loja_do_Duke
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(2);
                 opt.Lockout.MaxFailedAccessAttempts = 5;
             });
+            services.ConfigureApplicationCookie(opt=> {
+                opt.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Accessdenied");
+            });
             services.AddAuthentication().AddFacebook(options =>
             {
                 options.AppId = "1822027257998488";

@@ -96,6 +96,18 @@ namespace Loja_do_Duke.Controllers
                 }
                 AddErrors(result);
             }
+            List<SelectListItem> selects = new List<SelectListItem>();
+            selects.Add(new SelectListItem()
+            {
+                Value = "Admin",
+                Text = "Admin"
+            });
+            selects.Add(new SelectListItem()
+            {
+                Value = "User",
+                Text = "User"
+            });
+            model.RoleList = selects;
             return View(model);
         }
 

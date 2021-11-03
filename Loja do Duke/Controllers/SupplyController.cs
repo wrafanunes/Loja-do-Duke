@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SupplyController : Controller
     {
         private readonly ApplicationDbContext _db;

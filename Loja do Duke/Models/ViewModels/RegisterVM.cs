@@ -29,6 +29,7 @@ namespace Loja_do_Duke.Models.ViewModels
         [Display(Name = "Nome")]
         public string Name { get; set; }
         public IEnumerable<SelectListItem> RoleList { get; set; }
+        [Display(Name = "Nível de Autorização")]
         public string SelectedRole { get; set; }
     }
 }

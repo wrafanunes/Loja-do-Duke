@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -17,8 +18,6 @@ namespace Loja_do_Duke.Controllers
         {
             _db = db;
         }
-
-        [Authorize]
         public IActionResult Index()
         {
             IEnumerable<Category> categories = _db.Categories;

@@ -26,5 +26,20 @@ namespace Loja_do_Duke.Controllers
             var roles = _context.Roles.ToList();
             return View(roles);
         }
+
+        [HttpGet]
+        public IActionResult Upsert(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return View();
+            }
+            else
+            {
+                //atualizar
+                var objFromDb = _context.Roles.FirstOrDefault(u => u.Id == id);
+                return View(objFromDb);
+            }
+        }
     }
 }

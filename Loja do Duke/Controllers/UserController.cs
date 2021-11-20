@@ -93,5 +93,27 @@ namespace Loja_do_Duke.Controllers
             });
             return View(user);
         }
+
+        [HttpPost]
+        public IActionResult LockUnlock(string userId)
+        {
+            var objFromDb = _context.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
+            if (null == objFromDb)
+            {
+                return NotFound();
+            }
+            if (null != objFromDb.LockoutEnd && objFromDb.LockoutEnd > DateTime.Now)
+            {
+                objFromDb.LockoutEnd = DateTime.Now;
+                TempData[SD.Success] = "Usuário desbloqueado com sucesso.";
+            }
+            else
+            {
+                objFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+                TempData[SD.Success] = "Usuário bloqueado com sucesso.";
+            }
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

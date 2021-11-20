@@ -24,7 +24,24 @@
                     <td>
                         <div class="text-center">
                             <form asp-action="Delete" asp-route-userId="@item.Id">
-                                <a asp-action="Edit" asp-route-userId="@item.Id" class="btn btn-info text-white" style="cursor:pointer">Editar</a>
+                                <a asp-action="Edit" asp-route-userId="@item.Id" class="btn btn-info text-white" style="cursor:pointer">
+                                    Editar
+                                </a>
+
+                                @if (null == item.LockoutEnd || item.LockoutEnd < DateTime.Now)
+                                {
+                                    <button asp-action="LockUnlock" asp-route-userId="@item.Id" class="btn btn-success text-white"
+                                            style="cursor:pointer">
+                                        <span>&nbsp; Bloquear &nbsp;</span>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button asp-action="LockUnlock" asp-route-userId="@item.Id" class="btn btn-warning text-white"
+                                            style="cursor:pointer">
+                                        <span>Desbloquear</span>
+                                    </button>
+                                }
 
                                 <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?')"
                                         class="btn btn-danger">

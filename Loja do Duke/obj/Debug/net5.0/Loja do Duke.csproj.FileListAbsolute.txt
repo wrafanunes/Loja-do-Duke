@@ -944,3 +944,4 @@ C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Roles\Upsert.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Shared\_Notifications.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\User\Edit.cshtml.g.cs
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\User\ManageUserClaims.cshtml.g.cs

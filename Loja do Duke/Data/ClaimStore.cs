@@ -10,9 +10,9 @@ namespace Loja_do_Duke.Data
     {
         public static List<Claim> claims = new List<Claim>()
         {
-            new Claim("Create","Create"),
-            new Claim("Edit","Edit"),
-            new Claim("Delete","Delete")
+            new Claim("Criar","Create"),
+            new Claim("Editar","Edit"),
+            new Claim("Excluir","Delete")
         };
     }
 }

@@ -29,7 +29,7 @@
                                 </a>
 
                                 <a asp-action="ManageUserClaims" asp-route-userId="@item.Id" class="btn btn-primary text-white"
-                                   style="cursor:pointer">Claims</a>
+                                   style="cursor:pointer">Permissões</a>
 
                                 @if (null == item.LockoutEnd || item.LockoutEnd < DateTime.Now)
                                 {

@@ -140,6 +140,7 @@ namespace Loja_do_Duke.Controllers
             {
                 return NotFound();
             }
+            var existingUserClaims = await _user.GetClaimsAsync(identity);
 
             var model = new UserClaimsVM()
             {
@@ -152,6 +153,10 @@ namespace Loja_do_Duke.Controllers
                 {
                     ClaimType = claim.Type
                 };
+                if (existingUserClaims.Any(c => c.Type == claim.Type))
+                {
+                    user.IsSelected = true;
+                }
                 model.Claims.Add(user);
             }
             return View(model);
@@ -167,7 +172,20 @@ namespace Loja_do_Duke.Controllers
                 return NotFound();
             }
 
-            var result = await _user.AddClaimsAsync(identity, userClaimsVM.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.IsSelected.ToString())));
+            var claims = await _user.GetClaimsAsync(identity);
+            var result = await _user.RemoveClaimsAsync(identity, claims);
+            if (!result.Succeeded)
+            {
+                TempData[SD.Error] = "Erro ao tentar remover permissões";
+                return View(userClaimsVM);
+            }
+
+            result = await _user.AddClaimsAsync(identity, userClaimsVM.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.IsSelected.ToString())));
+            if (!result.Succeeded)
+            {
+                TempData[SD.Error] = "Erro ao tentar adicionar permissões";
+                return View(userClaimsVM);
+            }
             TempData[SD.Success] = "Permissões atualizadas com sucesso";
             return RedirectToAction(nameof(Index));
         }

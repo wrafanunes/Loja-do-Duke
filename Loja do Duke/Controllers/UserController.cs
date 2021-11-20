@@ -115,5 +115,19 @@ namespace Loja_do_Duke.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public IActionResult Delete(string userId)
+        {
+            var objFromDb = _context.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
+            if (null == objFromDb)
+            {
+                return NotFound();
+            }
+            _context.ApplicationUsers.Remove(objFromDb);
+            _context.SaveChanges();
+            TempData[SD.Success] = "Usuário excluído com sucesso.";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -21,7 +21,18 @@
                     <td>@item.Email</td>
                     <td>@item.Name</td>
                     <td>@item.Role</td>
-                    <td></td>
+                    <td>
+                        <div class="text-center">
+                            <form asp-action="Delete" asp-route-userId="@item.Id">
+                                <a asp-action="Edit" asp-route-userId="@item.Id" class="btn btn-info text-white" style="cursor:pointer">Editar</a>
+
+                                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?')"
+                                        class="btn btn-danger">
+                                    Excluir
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             }
         </table>

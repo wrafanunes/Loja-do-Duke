@@ -38,5 +38,27 @@ namespace Loja_do_Duke.Controllers
             }
             return View(userList);
         }
+
+        public IActionResult Edit(string userId)
+        {
+            var objFromDb = _context.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
+            if (null == objFromDb)
+            {
+                return NotFound();
+            }
+            var userRoles = _context.UserRoles.ToList();
+            var roles = _context.Roles.ToList();
+            var role = userRoles.FirstOrDefault(u => u.UserId == objFromDb.Id);
+            if (null != role)
+            {
+                objFromDb.RoleId = roles.FirstOrDefault(u => u.Id == role.RoleId).Id;
+            }
+            objFromDb.RoleList = _context.Roles.Select(u => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id
+            });
+            return View(objFromDb);
+        }
     }
 }

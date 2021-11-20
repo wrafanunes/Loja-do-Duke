@@ -41,5 +41,29 @@ namespace Loja_do_Duke.Controllers
                 return View(objFromDb);
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(IdentityRole identityRole)
+        {
+            if (await _role.RoleExistsAsync(identityRole.Name))
+            {
+
+            }
+            if (string.IsNullOrEmpty(identityRole.Id))
+            {
+                //criar
+                await _role.CreateAsync(new IdentityRole() { Name = identityRole.Name });
+            }
+            else
+            {
+                //atualizar
+                var objRoleFromDb = _context.Roles.FirstOrDefault(u => u.Id == identityRole.Id);
+                objRoleFromDb.Name = identityRole.Name;
+                objRoleFromDb.NormalizedName = identityRole.Name.ToUpper();
+                var result = await _role.UpdateAsync(objRoleFromDb);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -48,20 +48,29 @@ namespace Loja_do_Duke.Controllers
         {
             if (await _role.RoleExistsAsync(identityRole.Name))
             {
-
+                //erro
+                TempData[SD.Error] = "A Role já existe";
+                return RedirectToAction(nameof(Index));
             }
             if (string.IsNullOrEmpty(identityRole.Id))
             {
                 //criar
                 await _role.CreateAsync(new IdentityRole() { Name = identityRole.Name });
+                TempData[SD.Success] = "Role criada com sucesso";
             }
             else
             {
                 //atualizar
                 var objRoleFromDb = _context.Roles.FirstOrDefault(u => u.Id == identityRole.Id);
+                if(null == objRoleFromDb)
+                {
+                    TempData[SD.Error] = "Role não encontrada";
+                    return RedirectToAction(nameof(Index));
+                }
                 objRoleFromDb.Name = identityRole.Name;
                 objRoleFromDb.NormalizedName = identityRole.Name.ToUpper();
                 var result = await _role.UpdateAsync(objRoleFromDb);
+                TempData[SD.Success] = "Role atualizada com sucesso";
             }
             return RedirectToAction(nameof(Index));
         }

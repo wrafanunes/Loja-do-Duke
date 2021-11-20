@@ -74,5 +74,26 @@ namespace Loja_do_Duke.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var objFromDb = _context.Roles.FirstOrDefault(u => u.Id == id);
+            if (null == objFromDb)
+            {
+                TempData[SD.Error] = "Role não encontrada";
+                return RedirectToAction(nameof(Index));
+            }
+            var userRolesForThisRole = _context.UserRoles.Where(u => u.RoleId == id).Count();
+            if(userRolesForThisRole > 0)
+            {
+                TempData[SD.Error] = "Esta Role não pode ser excluída pois existe ao menos um usuário associado à ela";
+                return RedirectToAction(nameof(Index));
+            }
+            await _role.DeleteAsync(objFromDb);
+            TempData[SD.Success] = "Role excluída com sucesso";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

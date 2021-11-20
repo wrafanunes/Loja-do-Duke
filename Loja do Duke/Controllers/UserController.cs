@@ -1,10 +1,12 @@
 ﻿using Loja_do_Duke.Data;
 using Loja_do_Duke.Models;
+using Loja_do_Duke.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
@@ -128,6 +130,31 @@ namespace Loja_do_Duke.Controllers
             _context.SaveChanges();
             TempData[SD.Success] = "Usuário excluído com sucesso.";
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageUserClaims(string userId)
+        {
+            IdentityUser identity = await _user.FindByIdAsync(userId);
+            if (null == identity)
+            {
+                return NotFound();
+            }
+
+            var model = new UserClaimsVM()
+            {
+                UserId = userId
+            };
+            //usando uma classe estática diretamente
+            foreach (Claim claim in ClaimStore.claims)
+            {
+                UserClaim user = new UserClaim
+                {
+                    ClaimType = claim.Type
+                };
+                model.Claims.Add(user);
+            }
+            return View(model);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Loja_do_Duke.Models.ViewModels
     
     public class UserClaim
     {
-        public string Type { get; set; }
+        public string ClaimType { get; set; }
         public bool IsSelected { get; set; }
     }
 }

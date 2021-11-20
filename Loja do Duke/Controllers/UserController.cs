@@ -156,5 +156,20 @@ namespace Loja_do_Duke.Controllers
             }
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManageUserClaims(UserClaimsVM userClaimsVM)
+        {
+            IdentityUser identity = await _user.FindByIdAsync(userClaimsVM.UserId);
+            if (null == identity)
+            {
+                return NotFound();
+            }
+
+            var result = await _user.AddClaimsAsync(identity, userClaimsVM.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.IsSelected.ToString())));
+            TempData[SD.Success] = "Permissões atualizadas com sucesso";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

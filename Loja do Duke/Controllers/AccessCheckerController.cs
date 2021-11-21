@@ -22,7 +22,14 @@ namespace Loja_do_Duke.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult UserAccess()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "User,Admin")]
+        public IActionResult UserORAdminAccess()
         {
             return View();
         }

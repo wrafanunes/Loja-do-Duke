@@ -34,6 +34,7 @@ namespace Loja_do_Duke.Controllers
             return View();
         }
 
+        [Authorize(Policy = "Admin")]
         public IActionResult AdminAccess()
         {
             return View();

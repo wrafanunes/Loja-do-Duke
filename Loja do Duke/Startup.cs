@@ -56,6 +56,7 @@ namespace Loja_do_Duke
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("UserAndAdmin", policy => policy.RequireRole("Admin").RequireRole("User"));
             });
             services.AddRazorPages();
         }

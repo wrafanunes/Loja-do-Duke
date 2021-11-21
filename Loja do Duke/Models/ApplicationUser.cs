@@ -14,6 +14,7 @@ namespace Loja_do_Duke.Models
         [Required]
         public string Name { get; set; }
         [NotMapped]
+        [Display(Name = "Papel")]
         public string RoleId { get; set; }
         [NotMapped]
         public string Role { get; set; }

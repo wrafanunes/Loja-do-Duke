@@ -64,6 +64,7 @@ namespace Loja_do_Duke.Controllers
             return View();
         }
 
+        [Authorize(Policy = "AdminWithMoreThan1000Days")]
         public IActionResult OnlyWilsonRafael()
         {
             return View();

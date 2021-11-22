@@ -1,5 +1,6 @@
 using Loja_do_Duke.Data;
 using Loja_do_Duke.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -61,11 +62,8 @@ namespace Loja_do_Duke
                 options.AddPolicy("Admin_Create_Edit_DeleteAccess", policy => policy.RequireRole("Admin").RequireClaim("criar", "True")
                 .RequireClaim("editar", "True").RequireClaim("excluir", "True"));
 
-                options.AddPolicy("Admin_Create_Edit_DeleteAccess_OR_SuperAdmin", policy => policy.RequireAssertion(context => (
-                    context.User.IsInRole("Admin") && context.User.HasClaim(c => c.Type == "Criar" && c.Value == "True")
-                    && context.User.HasClaim(c => c.Type == "Editar" && c.Value == "True")
-                    && context.User.HasClaim(c => c.Type == "Excluir" && c.Value == "True")
-                ) || context.User.IsInRole("SuperAdmin")));
+                options.AddPolicy("Admin_Create_Edit_DeleteAccess_OR_SuperAdmin", policy => policy.RequireAssertion(context =>
+                AuthorizeAdminWithClaimsOrSuperAdmin(context)));
             });
             services.AddRazorPages();
         }
@@ -97,6 +95,15 @@ namespace Loja_do_Duke
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private bool AuthorizeAdminWithClaimsOrSuperAdmin(AuthorizationHandlerContext authorization)
+        {
+            return (
+                    authorization.User.IsInRole("Admin") && authorization.User.HasClaim(c => c.Type == "Criar" && c.Value == "True")
+                    && authorization.User.HasClaim(c => c.Type == "Editar" && c.Value == "True")
+                    && authorization.User.HasClaim(c => c.Type == "Excluir" && c.Value == "True")
+                ) || authorization.User.IsInRole("SuperAdmin");
         }
     }
 }

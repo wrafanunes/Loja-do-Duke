@@ -13,6 +13,7 @@ namespace Loja_do_Duke.Models
     {
         [Required]
         public string Name { get; set; }
+        public DateTime DateCreated { get; set; }
         [NotMapped]
         [Display(Name = "Papel")]
         public string RoleId { get; set; }

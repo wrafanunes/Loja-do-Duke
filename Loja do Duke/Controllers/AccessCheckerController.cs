@@ -63,5 +63,10 @@ namespace Loja_do_Duke.Controllers
         {
             return View();
         }
+
+        public IActionResult OnlyWilsonRafael()
+        {
+            return View();
+        }
     }
 }

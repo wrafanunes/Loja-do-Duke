@@ -67,6 +67,7 @@ namespace Loja_do_Duke
                 AuthorizeAdminWithClaimsOrSuperAdmin(context)));
                 options.AddPolicy("OnlySuperAdminChecker", policy => policy.Requirements.Add(new OnlySuperAdminChecker()));
             });
+            services.AddScoped<INumberOfDaysForAccount, NumberOfDaysForAccount>();
             services.AddRazorPages();
         }
 

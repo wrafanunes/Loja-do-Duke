@@ -1,4 +1,5 @@
 ﻿using Loja_do_Duke.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,6 +45,7 @@ namespace Loja_do_Duke.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "OnlySuperAdminChecker")]
         public async Task<IActionResult> Upsert(IdentityRole identityRole)
         {
             if (await _role.RoleExistsAsync(identityRole.Name))
@@ -77,6 +79,7 @@ namespace Loja_do_Duke.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "OnlySuperAdminChecker")]
         public async Task<IActionResult> Delete(string id)
         {
             var objFromDb = _context.Roles.FirstOrDefault(u => u.Id == id);

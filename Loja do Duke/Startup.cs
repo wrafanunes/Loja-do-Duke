@@ -1,3 +1,4 @@
+using Loja_do_Duke.Authorize;
 using Loja_do_Duke.Data;
 using Loja_do_Duke.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -64,6 +65,7 @@ namespace Loja_do_Duke
 
                 options.AddPolicy("Admin_Create_Edit_DeleteAccess_OR_SuperAdmin", policy => policy.RequireAssertion(context =>
                 AuthorizeAdminWithClaimsOrSuperAdmin(context)));
+                options.AddPolicy("OnlySuperAdminChecker", policy => policy.Requirements.Add(new OnlySuperAdminChecker()));
             });
             services.AddRazorPages();
         }

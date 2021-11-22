@@ -69,5 +69,11 @@ namespace Loja_do_Duke.Controllers
         {
             return View();
         }
+
+        [Authorize(Policy = "FirstNameAuth")]
+        public IActionResult FirstNameAuth()
+        {
+            return View();
+        }
     }
 }

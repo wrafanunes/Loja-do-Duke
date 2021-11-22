@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Loja_do_Duke.Data;
 
 namespace Loja_do_Duke.Areas.Identity.Pages.Account
 {
@@ -20,14 +21,16 @@ namespace Loja_do_Duke.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, 
+        public LoginModel(SignInManager<IdentityUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -84,6 +87,14 @@ namespace Loja_do_Duke.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = _context.ApplicationUsers.FirstOrDefault(u => u.Email.ToLower() == Input.Email.ToLower());
+                    var claims = await _userManager.GetClaimsAsync(user);
+                    if(claims.Count > 0)
+                    {
+                        await _userManager.RemoveClaimAsync(user, claims.FirstOrDefault(u => u.Type == "PrimeiroNome"));
+                    }
+                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("PrimeiroNome", user.Name));
+
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

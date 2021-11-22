@@ -948,9 +948,9 @@ C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\AdminAccess.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\Admin_CreateAccess.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\Admin_Create_Edit_DeleteAccess.cshtml.g.cs
-C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\Admin_Create_Edit_DeleteAccess_SuperAdmin.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\AllAccess.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\AuthorizedAccess.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\UserAccess.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\UserORAdminAccess.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\UserANDAdminAccess.cshtml.g.cs
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\Admin_Create_Edit_DeleteAccess_OR_SuperAdmin.cshtml.g.cs

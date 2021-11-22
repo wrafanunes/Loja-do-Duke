@@ -58,7 +58,8 @@ namespace Loja_do_Duke.Controllers
             return View();
         }
 
-        public IActionResult Admin_Create_Edit_DeleteAccess_SuperAdmin()
+        [Authorize(Policy = "Admin_Create_Edit_DeleteAccess_OR_SuperAdmin")]
+        public IActionResult Admin_Create_Edit_DeleteAccess_OR_SuperAdmin()
         {
             return View();
         }

@@ -60,6 +60,12 @@ namespace Loja_do_Duke
                 options.AddPolicy("Admin_CreateAccess", policy => policy.RequireRole("Admin").RequireClaim("criar", "True"));
                 options.AddPolicy("Admin_Create_Edit_DeleteAccess", policy => policy.RequireRole("Admin").RequireClaim("criar", "True")
                 .RequireClaim("editar", "True").RequireClaim("excluir", "True"));
+
+                options.AddPolicy("Admin_Create_Edit_DeleteAccess_OR_SuperAdmin", policy => policy.RequireAssertion(context => (
+                    context.User.IsInRole("Admin") && context.User.HasClaim(c => c.Type == "Criar" && c.Value == "True")
+                    && context.User.HasClaim(c => c.Type == "Editar" && c.Value == "True")
+                    && context.User.HasClaim(c => c.Type == "Excluir" && c.Value == "True")
+                ) || context.User.IsInRole("SuperAdmin")));
             });
             services.AddRazorPages();
         }

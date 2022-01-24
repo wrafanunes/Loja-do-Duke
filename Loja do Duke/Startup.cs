@@ -67,8 +67,10 @@ namespace Loja_do_Duke
                 AuthorizeAdminWithClaimsOrSuperAdmin(context)));
                 options.AddPolicy("OnlySuperAdminChecker", policy => policy.Requirements.Add(new OnlySuperAdminChecker()));
                 options.AddPolicy("AdminWithMoreThan1000Days", policy => policy.Requirements.Add(new AdminWithMoreThan1000DaysRequirement(1000)));
+                options.AddPolicy("UserWithFirstName", policy => policy.Requirements.Add(new UserWithFirstNameRequirement("WILSON")));
             });
             services.AddScoped<IAuthorizationHandler, AdminWithMoreThan1000DaysHandler>();
+            services.AddScoped<IAuthorizationHandler, UserWithFirstNameHandler>();
             services.AddScoped<INumberOfDaysForAccount, NumberOfDaysForAccount>();
             services.AddRazorPages();
         }

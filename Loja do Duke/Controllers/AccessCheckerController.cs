@@ -70,7 +70,7 @@ namespace Loja_do_Duke.Controllers
             return View();
         }
 
-        [Authorize(Policy = "FirstNameAuth")]
+        [Authorize(Policy = "UserWithFirstName")]
         public IActionResult FirstNameAuth()
         {
             return View();

@@ -49,8 +49,6 @@ namespace Loja_do_Duke
             //services.ConfigureApplicationCookie(opt=> {
             //    opt.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Accessdenied");
             //});
-
-
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));

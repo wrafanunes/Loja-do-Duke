@@ -22,18 +22,22 @@ namespace Loja_do_Duke.Authorize
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, UserWithFirstNameRequirement requirement)
         {
-            string userId = context.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (null != userId)
+            var userClaim = context.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (null != userClaim)
             {
-                var user = _application.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
-                var claims = Task.Run(async () => await _manager.GetClaimsAsync(user)).Result;
-                var claim = claims.FirstOrDefault(c => c.Type == "PrimeiroNome");
-                if (null != claim)
+                string userId = userClaim.Value;
+                if (null != userId)
                 {
-                    if (claim.Value.ToLower().Contains(requirement.Name.ToLower()))
+                    var user = _application.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
+                    var claims = Task.Run(async () => await _manager.GetClaimsAsync(user)).Result;
+                    var claim = claims.FirstOrDefault(c => c.Type == "PrimeiroNome");
+                    if (null != claim)
                     {
-                        context.Succeed(requirement);
-                        return Task.CompletedTask;
+                        if (claim.Value.ToLower().Contains(requirement.Name.ToLower()))
+                        {
+                            context.Succeed(requirement);
+                            return Task.CompletedTask;
+                        }
                     }
                 }
             }

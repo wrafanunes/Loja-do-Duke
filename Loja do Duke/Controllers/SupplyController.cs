@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class SupplyController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -30,6 +30,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         //Get - Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             SupplyVM vM = new SupplyVM()
@@ -59,6 +60,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         //Get - Edit
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int? id)
         {
             if (null == id || 0 == id) return NotFound();
@@ -91,6 +93,7 @@ namespace Loja_do_Duke.Controllers
         }
 
         //Get - Delete
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id)
         {
             if (null == id || 0 == id) return NotFound();

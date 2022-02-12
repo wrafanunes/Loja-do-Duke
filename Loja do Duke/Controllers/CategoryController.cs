@@ -20,7 +20,7 @@ namespace Loja_do_Duke.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> categories = _db.Categories;
+            IEnumerable<Category> categories = _db.Categories.OrderBy(c => c.DisplayOrder);
             return View(categories);
         }
 

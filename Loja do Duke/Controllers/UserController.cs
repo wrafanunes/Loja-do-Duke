@@ -1,6 +1,7 @@
 ﻿using Loja_do_Duke.Data;
 using Loja_do_Duke.Models;
 using Loja_do_Duke.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _context;

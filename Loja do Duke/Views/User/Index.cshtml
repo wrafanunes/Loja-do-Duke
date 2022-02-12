@@ -31,25 +31,41 @@
                                 <a asp-action="ManageUserClaims" asp-route-userId="@item.Id" class="btn btn-primary text-white"
                                    style="cursor:pointer">Permissões</a>
 
-                                @if (null == item.LockoutEnd || item.LockoutEnd < DateTime.Now)
+                                @if ((null == item.LockoutEnd || item.LockoutEnd < DateTime.Now) && item.Role != "SuperAdmin")
                                 {
                                     <button asp-action="LockUnlock" asp-route-userId="@item.Id" class="btn btn-success text-white"
                                             style="cursor:pointer">
                                         <span>&nbsp; Bloquear &nbsp;</span>
                                     </button>
                                 }
-                                else
+                                else if (item.Role != "SuperAdmin")
                                 {
                                     <button asp-action="LockUnlock" asp-route-userId="@item.Id" class="btn btn-warning text-white"
                                             style="cursor:pointer">
                                         <span>Desbloquear</span>
                                     </button>
                                 }
-
-                                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?')"
-                                        class="btn btn-danger">
-                                    Excluir
-                                </button>
+                                else
+                                {
+                                    <button disabled class="btn btn-secondary" title="Desculpe, não é possível bloquear um super administrador">
+                                        @* nbsp; significa non-breaking space(espaço rígido), é útil para formatação, em situações onde um elemento pode ter um texto
+                                            que se altera dependendo da situação, isso evita que o elemento diminua ou aumente de tamanho para acompanhar o texto*@
+                                        <span>&nbsp; Bloquear &nbsp;</span>
+                                    </button>
+                                }
+                                @if (item.Role != "SuperAdmin")
+                                {
+                                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?')"
+                                            class="btn btn-danger">
+                                        Excluir
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" disabled class="btn btn-secondary" title="Desculpe, não é possível excluir um super administrador">
+                                        Excluir
+                                    </button>
+                                }
                             </form>
                         </div>
                     </td>

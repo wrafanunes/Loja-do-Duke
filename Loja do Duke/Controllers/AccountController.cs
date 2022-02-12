@@ -75,11 +75,11 @@ namespace Loja_do_Duke.Controllers
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name, DateCreated = DateTime.Now };
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded && result.Errors.Count() > 0)
                 {
-                    foreach(var error in result.Errors)
+                    foreach (var error in result.Errors)
                     {
                         if (error.Code == "DuplicateUserName") error.Description = $"O usuário {model.Email} já está sendo usado.";
                     }

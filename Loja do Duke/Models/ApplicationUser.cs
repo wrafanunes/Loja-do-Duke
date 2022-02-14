@@ -21,7 +21,7 @@ namespace Loja_do_Duke.Models
         public string Role { get; set; }
         [NotMapped]
         public IEnumerable<SelectListItem> RoleList { get; set; }
-        public int QuantidadeLei { get; set; } = 500000;
-        public short EspacoInventario { get; set; } = 126;
+        public int Lei { get; set; } = 500000;
+        public short InventoryCapacity { get; set; } = 126;
     }
 }

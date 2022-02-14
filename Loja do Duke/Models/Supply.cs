@@ -32,6 +32,9 @@ namespace Loja_do_Duke.Models
         [Required(ErrorMessage = "O campo Descrição é obrigatório")]
         public string Description { get; set; }
 
+        [DisplayName("Espaço necessário no inventário")]
+        public short InventoryOccupation { get; set; }
+
         [DisplayName("Categoria")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]

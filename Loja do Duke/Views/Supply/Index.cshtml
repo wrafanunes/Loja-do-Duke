@@ -24,6 +24,7 @@
                     <th>Quantidade no Inventário</th>
                     <th>Quantidade Disponível</th>
                     <th>Descrição</th>
+                    <th>Espaço necessário no inventário</th>
                     <th>Categoria</th>
                 </tr>
             </thead>
@@ -36,6 +37,7 @@
                         <td width="30%">@obj.InventoryQuantity</td>
                         <td width="30%">@obj.AvailableQuantity</td>
                         <td width="30%">@obj.Description</td>
+                        <td width="30%">@obj.InventoryOccupation</td>
                         <td width="30%">@obj.Category.Name</td>
                         <td class="text-center">
                             <div class="w-75 btn-group" role="group">

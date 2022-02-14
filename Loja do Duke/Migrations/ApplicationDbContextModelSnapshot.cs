@@ -54,6 +54,9 @@ namespace Loja_do_Duke.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<short>("InventoryOccupation")
+                        .HasColumnType("smallint");
+
                     b.Property<int>("InventoryQuantity")
                         .HasColumnType("int");
 
@@ -280,15 +283,15 @@ namespace Loja_do_Duke.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<short>("EspacoInventario")
+                    b.Property<short>("InventoryCapacity")
                         .HasColumnType("smallint");
+
+                    b.Property<int>("Lei")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuantidadeLei")
-                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });

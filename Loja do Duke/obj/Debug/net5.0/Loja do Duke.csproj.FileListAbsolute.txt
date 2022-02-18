@@ -956,3 +956,4 @@ C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\Admin_Create_Edit_DeleteAccess_OR_SuperAdmin.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\OnlyWilsonRafael.cshtml.g.cs
 C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\AccessChecker\FirstNameAuth.cshtml.g.cs
+C:\Users\wilson.nunes\Documents\workspace\C#\Loja do Duke\Loja do Duke\obj\Debug\net5.0\Razor\Views\Supply\Buy.cshtml.g.cs

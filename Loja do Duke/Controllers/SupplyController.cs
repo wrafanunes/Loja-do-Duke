@@ -92,6 +92,35 @@ namespace Loja_do_Duke.Controllers
             return View(supply);
         }
 
+        //Get - Buy
+        [Authorize(Roles = "User")]
+        public IActionResult Buy(int? id)
+        {
+            if (null == id || 0 == id) return NotFound();
+            SupplyVM vM = new SupplyVM()
+            {
+                Supply = new Supply()
+            };
+            vM.Supply = _db.Supplies.Find(id);
+            if (null == vM.Supply) return NotFound();
+            return View(vM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Buy(Supply supply, SupplyVM supplyVM)
+        {
+            if (ModelState.IsValid)
+            {
+                supply.AvailableQuantity -= supplyVM.Quantity;
+                _db.Supplies.Update(supply);
+                _db.SaveChanges();
+                TempData[SD.Success] = "Compra realizada com sucesso";
+                return RedirectToAction("Index");
+            }
+            return View(supply);
+        }
+
         //Get - Delete
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id)

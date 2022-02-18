@@ -41,11 +41,14 @@
                         <td width="30%">@obj.Category.Name</td>
                         <td class="text-center">
                             <div class="w-75 btn-group" role="group">
-                                <div class="col-6 text-right">
+                                <div class="col-4 text-right">
                                     <a asp-controller="Supply" asp-route-Id="@obj.Id" asp-action="Edit" class="btn btn-primary">Atualizar</a>
                                 </div>
-                                <div class="col-6 text-right">
+                                <div class="col-4 text-right">
                                     <a asp-controller="Supply" asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-danger mx-5">Excluir</a>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a asp-controller="Supply" asp-route-Id="@obj.Id" asp-action="Buy" class="btn btn-secondary mx-5">Comprar</a>
                                 </div>
                             </div>
                         </td>

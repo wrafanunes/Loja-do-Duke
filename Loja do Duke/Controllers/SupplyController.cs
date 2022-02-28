@@ -166,8 +166,9 @@ namespace Loja_do_Duke.Controllers
         {
             var userId = _user.GetUserId(User);
             var user = _db.ApplicationUsers.Find(userId);
+            var supply = _db.Supplies.Find(supplyId);
             var applicationUserSupply = _db.ApplicationUserSupplies.SingleOrDefault(x => x.UserId == userId && x.SupplyId == supplyId);
-            if (null == applicationUserSupply) return Tuple.Create(new ApplicationUserSupply(userId, supplyId), user);
+            if (null == applicationUserSupply) return Tuple.Create(new ApplicationUserSupply(userId, supplyId, supply.Name), user);
             return Tuple.Create(applicationUserSupply, user);
         }
 

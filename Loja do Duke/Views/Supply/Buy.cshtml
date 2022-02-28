@@ -155,7 +155,6 @@
                 document.getElementById("quantity").max = document.getElementById("inventoryCapacity").innerHTML / INVENTORYOCCUPATION
             }
             else if (document.getElementById("inventoryCapacity").innerHTML / INVENTORYOCCUPATION < @Model.Supply.AvailableQuantity && @Model.Supply.Id == 5) {
-                console.log('teste')
                 let counter = 0;
                 for (let i = 0; i < INVENTORYCAPACITY; i += INVENTORYOCCUPATION) {
                     counter++

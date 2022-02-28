@@ -21,41 +21,44 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartialCustom"></partial>
                     @*<partial name="_LoginPartial"></partial>*@
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categorias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Supply" asp-action="Index">Suprimentos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Usuários</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Papéis</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Verificador de Acesso
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="AllAccess">Acesso Completo</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="AuthorizedAccess">Acesso Autorizado</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="UserAccess">Acesso de Usuário</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="UserORAdminAccess">Acesso de Usuário OU Administrador</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="UserANDAdminAccess">Acesso de Usuário E Administrador</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="AdminAccess">Acesso de Administrador</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="Admin_CreateAccess">Administrador - Apenas permissão para Criar</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="Admin_Create_Edit_DeleteAccess">Administrador - Permissões para Criar, Editar e Excluir</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="Admin_Create_Edit_DeleteAccess_OR_SuperAdmin">Administrador - Permissões para Criar, Editar e Excluir || Super Administrador</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="OnlyWilsonRafael">Somente Wilson Rafael</a>
-                                <a class="dropdown-item" asp-controller="AccessChecker" asp-action="FirstNameAuth">Verificar Acesso pelo Primeiro Nome</a>
-                            </div>
-                        </li>
-                    </ul>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Supply" asp-action="Index">Suprimentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Inventory" asp-action="Index">Inventário</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Usuários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Papéis</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Verificador de Acesso
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="AllAccess">Acesso Completo</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="AuthorizedAccess">Acesso Autorizado</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="UserAccess">Acesso de Usuário</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="UserORAdminAccess">Acesso de Usuário OU Administrador</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="UserANDAdminAccess">Acesso de Usuário E Administrador</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="AdminAccess">Acesso de Administrador</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="Admin_CreateAccess">Administrador - Apenas permissão para Criar</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="Admin_Create_Edit_DeleteAccess">Administrador - Permissões para Criar, Editar e Excluir</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="Admin_Create_Edit_DeleteAccess_OR_SuperAdmin">Administrador - Permissões para Criar, Editar e Excluir || Super Administrador</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="OnlyWilsonRafael">Somente Wilson Rafael</a>
+                            <a class="dropdown-item" asp-controller="AccessChecker" asp-action="FirstNameAuth">Verificar Acesso pelo Primeiro Nome</a>
+                        </div>
+                    </li>
+                </ul>
                 </div>
             </div>
         </nav>

@@ -14,6 +14,9 @@ namespace Loja_do_Duke.Models
         public string UserId { get; set; }
         public int? SupplyId { get; set; }
 
+        [DisplayName("Suprimento")]
+        public string SupplyName { get; set; }
+
         [DisplayName("Quantidade no inventário")]
         public int UserInventoryQuantity { get; set; }
 
@@ -22,10 +25,11 @@ namespace Loja_do_Duke.Models
 
         }
 
-        public ApplicationUserSupply(string userId, int? supplyId)
+        public ApplicationUserSupply(string userId, int? supplyId, string supplyName)
         {
             UserId = userId;
             SupplyId = supplyId;
+            SupplyName = supplyName;
         }
     }
 }

@@ -20,11 +20,6 @@ namespace Loja_do_Duke.Models
         [DisplayName("Preço")]
         [Required(ErrorMessage = "O campo Preço é obrigatório")]
         public int Price { get; set; }
-
-        [DisplayName("Quantidade no inventário")]
-        [Required(ErrorMessage = "O campo 'Quantidade no inventário' é obrigatório")]
-        public int InventoryQuantity { get; set; }
-
         [DisplayName("Quantidade Disponível")]
         public int? AvailableQuantity { get; set; }
 

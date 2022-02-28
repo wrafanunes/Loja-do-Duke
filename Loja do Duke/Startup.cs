@@ -49,7 +49,11 @@ namespace Loja_do_Duke
             //services.ConfigureApplicationCookie(opt=> {
             //    opt.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Accessdenied");
             //});
-            
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "1822027257998488";
+                options.AppSecret = "6cc858c804c56c55a52a4017d6eb44e8";
+            });
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));

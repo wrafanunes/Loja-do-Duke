@@ -3,7 +3,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Bem-vindo</h1>
     @if (User.Identity.IsAuthenticated)
     {
         var twoFactor = ViewData["TwoFactorEnabled"];
@@ -20,10 +20,15 @@
         {
             <h2>Seu nível de autorização é - Administrador</h2>
         }
-        else
+        else if (User.IsInRole("User"))
         {
             <h2>Seu nível de autorização é - Usuário</h2>
         }
+        else
+        {
+            <h2>Seu nível de autorização é - Super Administrador</h2>
+        }
     }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Este site é uma representação da loja de suprimentos do NPC Duke de Resident Evil Village.</p>
+    <p>Aprenda como <a href="https://docs.microsoft.com/aspnet/core">construir aplicações Web usando ASP.NET Core</a>.</p>
 </div>

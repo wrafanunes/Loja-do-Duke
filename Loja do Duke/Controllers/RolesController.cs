@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class RolesController : Controller
     {
         private readonly ApplicationDbContext _context;

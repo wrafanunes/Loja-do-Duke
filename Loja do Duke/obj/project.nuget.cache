@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "w8eA+jmuUx/kGjMlhuvApNELyCWr8svpwHzunUGP9TnsmvuXE34hSvpBT+V2ETr/D9C9ezHyXWVasgooP9Hg2Q==",
+  "dgSpecHash": "TabgcdHuDzj7Jn4pfRkV7ISJB3GMVG904u49ViW8I4uoLi0Cjgn7vEgtYTXxxCi4yGyvFzqz1XoO2wxOR2XyLg==",
   "success": true,
   "projectFilePath": "C:\\Users\\wilson.nunes\\Documents\\workspace\\C#\\Loja do Duke\\Loja do Duke\\Loja do Duke.csproj",
   "expectedPackageFiles": [
@@ -36,9 +36,7 @@
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\5.0.12\\microsoft.entityframeworkcore.tools.5.0.12.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
-    "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
-    "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.configuration.commandline\\5.0.0\\microsoft.extensions.configuration.commandline.5.0.0.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.2\\microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\wilson.nunes\\.nuget\\packages\\microsoft.extensions.dependencymodel\\5.0.0\\microsoft.extensions.dependencymodel.5.0.0.nupkg.sha512",

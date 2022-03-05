@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Loja_do_Duke.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
